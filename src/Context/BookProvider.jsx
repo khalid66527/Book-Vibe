@@ -1,5 +1,6 @@
 import React, {  createContext, useState } from 'react';
 import { toast } from 'react-toastify';
+// import BookProvider from './contexts/BookProvider';
 
 
 export const BookContext = createContext();
@@ -74,9 +75,11 @@ const BookProvider = ({children}) => {
 
     }
 
-    return <BookContext.Provider value={data}>
+    return (
+    <BookContext.Provider value={data}>
         {children}
     </BookContext.Provider>
+    )
 };
 
 export default BookProvider;
