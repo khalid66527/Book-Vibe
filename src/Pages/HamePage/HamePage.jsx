@@ -1,8 +1,9 @@
-import React from 'react';
 import Banner from '../../Components/Banner/Banner';
 import Books from './Books';
 
+
 const HamePage = () => {
+
     return (
         <div>
             <Banner></Banner>

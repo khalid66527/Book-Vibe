@@ -1,7 +1,8 @@
 // import React, { use } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { PiClockAfternoon } from 'react-icons/pi';
 import { useLoaderData, useParams } from 'react-router';
+import { BookContext } from '../../Context/BookProvider';
 // const booksPromise = fetch("/booksData.json").then(res => res.json())
 
 const BooksDetails = () => {
@@ -14,26 +15,13 @@ const BooksDetails = () => {
     // console.log('books:', books);
     const expectedBook = books.find((book) => book.bookId === Number(bookId));
 
-    const { yearOfPublishing, totalPages, review, rating, publisher, image,  bookName, author } = expectedBook;
+    const { yearOfPublishing, totalPages, review, rating, publisher, image, bookName, author } = expectedBook;
 
-    const [stareadBooks, setStaReadBooks] = useState()
+    const {handleMarkAsRead , storedBooks ,handleWishList} =useContext(BookContext);
 
-    const handleMarkAsRead = (currentBook) =>{
-        // step 1: store book id 
-        // step 2: where to store
-        // step 3: array or collection 
-        // step 4: if the book already exist then show a alert or toost 
-        // step 5: if not then add the book in the array or collection 
-        console.log("currentBook" , bookId);
-        const isExistBook = stareadBooks.find(book => book.bookId === currentBook.bookId);
-        if(isExistBook){
-            alert("The book is already exist")
-        }
-        else{
-            setStaReadBooks(...stareadBooks , currentBook)
-        }
+    console.log(handleMarkAsRead ,storedBooks);
 
-    }
+
 
     return (
         <div>
@@ -43,8 +31,8 @@ const BooksDetails = () => {
                         src={
                             image
                         }
-                        alt="Album" 
-                        className='w-[400px] h-[500px]'/>
+                        alt="Album"
+                        className='w-[400px] h-[500px]' />
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">{bookName}</h2>
@@ -55,8 +43,8 @@ const BooksDetails = () => {
                     <p><span className='font-bold'>Review :</span> {review}</p>
                     <p className='font-bold'>Tag :
                         {
-                        expectedBook.tags.map((tag, ind) => (<div className='badge bg-gray-100 text-green-500 rounded-2xl mx-2' key={ind}># {tag}</div>))
-                    }
+                            expectedBook.tags.map((tag, ind) => (<span className='badge bg-gray-100 text-green-500 rounded-2xl mx-2' key={ind}># {tag}</span>))
+                        }
                     </p>
                     <div className=" flex gap-10">
                         <div className="">
@@ -75,8 +63,8 @@ const BooksDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions ">
-                        <button className="btn btn-success btn-outline" onClick={()=>handleMarkAsRead(bookId)}>Mark as Read</button>
-                        <button className="btn btn-success">Add to Wishlist</button>
+                        <button className="btn btn-success btn-outline" onClick={() => handleMarkAsRead(expectedBook)}>Mark as Read</button>
+                        <button className="btn btn-success" onClick={() => handleWishList(expectedBook)}>Add to Wishlist</button>
                     </div>
                 </div>
             </div>
