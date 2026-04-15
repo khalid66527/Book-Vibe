@@ -33,10 +33,11 @@ const ErrorPage = ({
                             className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-xl transition-all active:scale-95"
                         >
                             Try Again
-                        </button>
+                        </button >
                     )}
                     
                     <button
+                        
                         onClick={onGoHome || (() => window.location.href = '/')}
                         className="flex-1 flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium py-3 px-6 rounded-xl transition-all active:scale-95"
                     >
